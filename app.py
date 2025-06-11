@@ -56,6 +56,16 @@ def onboard_user_refresh():
     account_link_url = _generate_account_link(account_id, origin)
     return redirect(account_link_url)
 
+@app.route('/onboard-user/test', methods=['GET'])
+def onboard_user_refresh():
+    if 'account_id' not in session:
+        return redirect('/')
+
+    account_id = session['account_id']
+    get_user_id = 'd00c62f9-fbb9-431b-9254-3ae326ae897e'
+    account_link_url = _generate_account_link(account_id, origin+get_user_id)
+    return redirect(account_link_url)
+
 
 def _generate_account_link(account_id, origin):
     account_link = stripe.AccountLink.create(
